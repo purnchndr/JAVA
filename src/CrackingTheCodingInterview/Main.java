@@ -1,13 +1,11 @@
 package CrackingTheCodingInterview;
+import CrackingTheCodingInterview.ArraysAndStrings.PalindromePermutation;
 import CrackingTheCodingInterview.ArraysAndStrings.StringBuilder;
 
 public class Main {
     public static void main(String[] args) {
-        StringBuilder s = new StringBuilder("hello");
-        System.out.println(s);
-        s.append(" chandan ");
-        System.out.println(s);
-        s.delete(9);
+
+        var s = PalindromePermutation.isPP("place    of place           of");
         System.out.println(s);
     }
 

@@ -1,5 +1,7 @@
 package CrackingTheCodingInterview.ArraysAndStrings;
 //// Write a methode to replace all spaces with "%20" in O(1) space
+
+
 public class URLify {
     public static void urlify(char[] arr,int num){
         num -= 1;

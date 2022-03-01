@@ -1,7 +1,6 @@
 package CrackingTheCodingInterview.ArraysAndStrings;
 
-import java.util.Arrays;
-import java.util.Locale;
+import static CrackingTheCodingInterview.ArraysAndStrings.PalindromePermutation.getLowerCase;
 
 public class Permutation {
 
@@ -48,14 +47,7 @@ public class Permutation {
     }
 
     public static String toLowerCase(String str){
-        char[] c = str.toCharArray();
-       for(int i = 0; i< c.length;i++){
-           int n= (int)c[i];
-           if(n < 91 && n> 64){
-               c[i] = (char) (((int)c[i])+32);
-           }
-       }
-      return new String(c);
+        return getLowerCase(str);
     }
 
   public static void main(String[] args) {

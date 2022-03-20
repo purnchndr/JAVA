@@ -20,7 +20,7 @@ public class DuplicateInString {
 
   public static void main(String[] args) {
     //System.out.println(isUnique("purna"));
-      for(int i = 0; i< 128; i++){
+      for(int i = 0; i< 256; i++){
           char c = (char)i;
       System.out.print(c + " " );
       }

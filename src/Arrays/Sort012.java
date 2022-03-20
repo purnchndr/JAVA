@@ -1,13 +1,12 @@
 package Arrays;
 public class Sort012 {
-    public static int[] sort012(int[] arr){
+    public static void sort012(int[] arr){
         int start= 0, mid = 0, end = arr.length-1;
         while(mid <= end){
             if(arr[mid] == 0) swap(arr, start++,mid++);
             else if(arr[mid] == 1) mid++;
             else  swap(arr, mid,end--);
         }
-        return  arr;
     }
     private static void swap(int[] arr, int s, int e){
         int temp= arr[s];

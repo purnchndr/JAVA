@@ -10,18 +10,20 @@ public class Use {
 
     public static void main(String[] args){
 
-        int n = -1;
-        try {
-            Use.check(n);
-            System.out.println("In Try");
-        } catch (Exception e) {
-            e.printStackTrace();
-            //Use.check(n);
-      System.out.println("In catch");
-        }
-        finally{
-      System.out.println("In finally block");
-        }
+
+
+//        int n = -1;
+//        try {
+//            Use.check(n);
+//            System.out.println("In Try");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            //Use.check(n);
+//      System.out.println("In catch");
+//        }
+//        finally{
+//      System.out.println("In finally block");
+//        }
 //        HashSet<String> set = new HashSet<>();
 //        set.add("Hello");
 //        set.add("Namaste");

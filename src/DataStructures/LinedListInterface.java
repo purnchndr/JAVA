@@ -1,4 +1,4 @@
-package DsaCodeWithMosh;
+package DataStructures;
 
 public interface LinedListInterface {
     public boolean addLast();

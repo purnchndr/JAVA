@@ -1,4 +1,4 @@
-package DsaCodeWithMosh;
+package DataStructures;
 
 public class ArrayList {
     private int[] array;

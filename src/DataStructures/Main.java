@@ -1,4 +1,4 @@
-package DsaCodeWithMosh;
+package DataStructures;
 
 public class Main {
     public static void main(String[] args) {

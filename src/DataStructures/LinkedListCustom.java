@@ -1,4 +1,4 @@
-package DsaCodeWithMosh;
+package DataStructures;
 
 class Node{
     int data;

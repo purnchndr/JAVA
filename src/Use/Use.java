@@ -9,7 +9,7 @@ public class Use {
     }
 
     public static void main(String[] args){
-
+Stack<Integer> s = new Stack();
 
 
 //        int n = -1;

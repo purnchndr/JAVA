@@ -3,6 +3,7 @@ package DataStructures;
 public class StackCustom {
     int size = -1;
     int[] stack;
+    public int count = 0;
 
     public StackCustom(int size) {
         stack = new int[size];
@@ -93,6 +94,36 @@ public class StackCustom {
         this.pushAtBottom(data);
     }
 
+    public void sort(){
+        if (this.isEmpty())
+            return;
+        count++;
+        int top = this.pop();
+        sort();
+        sortHelperIt(top);
+    }
+    public void sortHelperIt(int top){
+        StackCustom temp = new StackCustom(this.size+1);
+        while (!this.isEmpty() && this.peek() > top)
+            temp.push(this.pop());
+    count++;
+        this.push(top);
+        while (!temp.isEmpty())
+            this.push(temp.pop());
+    }
+
+    public void sortHelperRec(int data){
+        if(this.isEmpty() || data >= this.peek()){
+            this.push(data);
+            return;
+        }
+        count++;
+        int top = this.pop();
+        sortHelperRec(data);
+        this.push(top);
+
+    }
+
     public boolean isEmpty() {
         return size == -1;
     }
@@ -101,38 +132,6 @@ public class StackCustom {
         return size == stack.length - 1;
     }
 
-    public static void main(String[] args) {
-
-        StackCustom s = new StackCustom(50);
-        //System.out.println(s.getSize());
-        s.push(10);
-        s.push(20);
-        s.push(30);
-       // System.out.println(s.pop());
-        s.push(10);
-        s.push(20);
-        //System.out.println(s.contains(10));
-       // s.pop();
-        s.push(50);
-//        s.pop();
-//        s.pop();
-//        System.out.println(s.getSize());
-//        s.print();
-        s.pushAtBottomR(100);
-        s.pushAtBottomR(200);
-        s.pushAtBottomR(300);
-        System.out.println(s.getSize());
-        s.print();
-        s.reverse();
-        s.print();
-        System.out.println(s.elementAt(8));
-
-//        System.out.println("before");
-//        s.print();
-//        s.reverseR();
-//        System.out.println("after");
-        s.print();
-    }
 }
 
 //        StackCustome s = new StackCustome(5);

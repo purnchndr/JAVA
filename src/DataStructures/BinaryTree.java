@@ -1,8 +1,7 @@
 package DataStructures;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
+import java.util.ArrayList;
 
 class TreeNode{
      int data;
@@ -105,11 +104,15 @@ public class BinaryTree {
     }
 
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree();
-        tree.createTree();
-       // tree.postOrderTraversal();
-        System.out.println(tree.height());
+//        BinaryTree tree = new BinaryTree();
+//        tree.createTree();
+//       // tree.postOrderTraversal();
+//        System.out.println(tree.height());
         //10 20 40 -1 -1 50 60 -1  -1 -1 30 -1 70 -1 -1
+//        Deque<Integer> dq  = new ArrayDeque<>();
+//        Queue<Integer> q = new LinkedList<>();
+//        dq.add(5);
+
     }
 
 }

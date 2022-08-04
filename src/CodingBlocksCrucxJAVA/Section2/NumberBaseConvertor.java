@@ -1,7 +1,6 @@
 package CodingBlocksCrucxJAVA.Section2;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 // TODO: 01-02-2022  
 public class NumberBaseConvertor {
@@ -21,6 +20,7 @@ public class NumberBaseConvertor {
 
 
     public static void main(String[] args) {
+        PriorityQueue<Integer> q = new PriorityQueue<Integer>();
         System.out.println(convertAnyBaseToDecimal(101,2));
     }
 }

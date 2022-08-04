@@ -2,10 +2,7 @@ package DataStructures;
 
 import DataStructures.StackCustom;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,7 +29,19 @@ public class Main {
 
 //       String st = "((a/b))";
 //        System.out.println(findRedundantBrackets(st));
-        Queue<Integer> a = new LinkedList<>();
+        Queue<Integer> a = new ArrayDeque<>();
+        /// find 3rd largerst element of array k = 3
+        int k = 4;
+        Integer[] arr = new Integer[]{1,2,3,4,100,300,200,50};
+        PriorityQueue<Integer> q = new PriorityQueue<Integer>(k);
+        q.addAll(Arrays.asList(arr).subList(0, k));
+        for (int i = k; i < arr.length; i++){
+            if(q.peek() < arr[i]){
+                q.poll();
+                q.add(arr[i]);
+            }
+        }
+        System.out.println(q.peek());
 
 
 
@@ -61,4 +70,6 @@ public class Main {
     public static boolean isSymble(char c){
         return (c == '-' || c == '*' || c == '/' || c == '+');
     }
+
+
 }

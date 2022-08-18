@@ -9,7 +9,48 @@ public class Use {
     }
 
     public static void main(String[] args){
-Stack<Integer> s = new Stack();
+
+
+        int arr[] = {100,5,300,70,1,2,3,4,5,6,7,8};
+//
+//        System.out.printf("Before");
+//        int min = arr[0];
+//        int max = arr[0];
+//        for(int i : arr) {
+//            if(min > i)
+//                min = i;
+//            if(max < i)
+//                max = i;
+//        }
+//
+//        int s = 0;
+//        int e = arr.length-1;
+//        while (s<e){
+//            int temp = arr[s];
+//            arr[s++] = arr[e];
+//            arr[e--] = temp;
+//        }
+        for(int i = 0; i< arr.length/2; i++){
+            int l = arr.length-1-i;
+            int temp = arr[i];
+            arr[i] = arr[l];
+            arr[l] = temp;
+        }
+
+        System.out.println("after");
+        for(int i : arr)
+            System.out.print(i+", ");
+//        Arrays.sort(arr);
+//        int k = 2;
+//        System.out.println(arr[k-1]+":  "+ arr[arr.length-k]);
+
+
+
+
+
+
+
+//Stack<Integer> s = new Stack();
 
 
 //        int n = -1;

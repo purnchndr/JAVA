@@ -56,7 +56,7 @@ public class MyGraphW {
 
   public static void main(String[] args) {
     MyGraphW graphW = new MyGraphW(10);
-    graphW.addEdge("A","C",10);
+      graphW.addEdge("A","C",10);
       graphW.addEdge("N","D",10);
       graphW.addEdge("M","E",10);
       graphW.addEdge("G","H",10);

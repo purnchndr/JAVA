@@ -1,14 +1,14 @@
 package DataStructures;
 
-public class ArrayList {
+public class ArrayListCustome<T> {
     private int[] array;
    private int length = 0;
    private int DEFAULT_SIZE = 16;
 
-    public ArrayList (int size){
+    public ArrayListCustome(int size){
      array = new int[size];
     }
-    public ArrayList (){
+    public ArrayListCustome(){
         array = new int[DEFAULT_SIZE];
     }
 
@@ -92,8 +92,8 @@ public class ArrayList {
             if(i > res) res = i;
        return res;
     }
-    public ArrayList getIntersection(int[] arr){
-        ArrayList ar = new ArrayList(arr.length);
+    public ArrayListCustome<T> getIntersection(int[] arr){
+        ArrayListCustome<T> ar = new ArrayListCustome<T>(arr.length);
         int counter = 0;
         for(int i = 0; i< length && counter < arr.length; i++)
             if(arr[counter] == array[i])
@@ -121,3 +121,4 @@ public class ArrayList {
         else return false;
     }
 }
+

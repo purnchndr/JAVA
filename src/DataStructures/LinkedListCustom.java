@@ -30,6 +30,8 @@ public class LinkedListCustom {
        }
    }
 
+
+
    public void addLast(int data){
        if(tail == null) {
            this.head = this.tail = new Node(data);

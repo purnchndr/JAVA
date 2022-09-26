@@ -1,5 +1,5 @@
 package Recursion;
-
+import java.util.Arrays;
 public class MergeSort {
     public static void mergeSort(int[] arr,int s, int e){
         if(s>=e)
@@ -21,5 +21,11 @@ public class MergeSort {
        while (i<= mid && j <= e){
 
        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {5,8,9,12,15-2,-1};
+        mergeSort(arr,0,6);
+        System.out.println(Arrays.toString(arr));
     }
 }

@@ -42,23 +42,18 @@ public class Main {
                 return 1;
             return 0;
         }
-
         int count = 0;
 
         // case 0,0
-
         count += balanceBinary(leftSum, rightSum, start+1,end-1);
 
         // case 0,1
-
         count += balanceBinary(leftSum, rightSum+1, start+1,end-1);
 
         // case 1,0
-
         count += balanceBinary(leftSum+1, rightSum,start+1,end-1);
 
         // case 0,0
-
         count += balanceBinary(leftSum+1, rightSum+1, start+1,end-1);
 
         return count;

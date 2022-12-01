@@ -2,10 +2,9 @@ package Use;
 
 
 import DataStructures.StringBuild;
+import Exceptions.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static Algorithms.Utility.swap;
 
@@ -328,9 +327,123 @@ public class Use {
 
     }
 
+    public static int getIndex(String a, String b){
+        if(a.length() < b.length())
+            return -1;
 
-    public static void main(String[] args){
-        String str = "ab3";
-        printPermutations(str, "");
+        for(int i = 0; i< a.length() && i< b.length(); i++ ){
+            int index = 0;
+            boolean flag = false;
+            if(a.charAt(i) == b.charAt(index)){
+                flag = true;
+                while(true){
+                    if(a.charAt(index+i) != b.charAt(index)){
+                        flag = false;
+                        break;
+                    }
+                    index++;
+                    if(index == b.length())
+                        return i;
+                }
+            }
+            if(flag)
+                i = index;
+        }
+        return -1;
     }
+
+    public static String removeString(String a, String b){
+        while(a.contains(b)){
+            int index = a.indexOf(b);
+            a = a.substring(0,index)+a.substring(index+b.length());
+        }
+        return a;
+    }
+
+    private static void findSubsets(int array[]) {
+        int numOfSubsets = 1 << array.length;
+
+        for (int i = 0; i < numOfSubsets; i++) {
+            int pos = array.length - 1;
+            int bitmask = i;
+
+            System.out.print("{");
+            while (bitmask > 0) {
+                if ((bitmask & 1) == 1)
+                    System.out.print(array[pos] + ",");
+                bitmask >>= 1;
+                pos--;
+            }
+            System.out.print("}");
+        }
+    }
+    private static class User implements Comparable<User> {
+        int point;
+        public User(int point) {
+            this.point= point;
+        }
+
+        @Override
+        public int compareTo(User user) {
+            return this.point - user.point;
+        }
+        @Override
+        public String toString( ) {
+            return "Point = " + this.point;
+        }
+    }
+    public static <T extends Comparable<T>> T getMax(T item1, T item2){
+        return (item1.compareTo(item2) > 0)? item1 : item2;
+    }
+
+    public static <K, V> void print(K key, V value){
+        System.out.println("Key : "+key + " || Value : "+value);
+    }
+    int fun(){
+        return 20;
+    }
+
+    public static ArrayList<Integer> findAllPrimesTillN(int n){
+        ArrayList<Integer> list = new ArrayList<>();
+        Collections.addAll(list,1,2);
+        boolean[] map = new boolean[n+1];
+        for (int i = 3; i<=n; i++){
+            if(map[i]) continue;
+            if(isPrime(i)) {
+                for (int j = i + i; j <= n; j = j + j)
+                    map[j] = true;
+                list.add(i);
+            }
+        }
+
+        return list;
+    }
+    private static boolean isPrime(int num){
+        if(num <1)
+            return false;
+        int count = 0;
+        for (int i=2; i<=Math.sqrt(num); i++){
+            if(num%i == 0)
+                count++;
+        }
+        return count < 1;
+    }
+
+    public static ArrayList<Integer> findAllPrimesTillN2(int n){
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        for (int i = 2; i<=n; i++)
+            if(isPrime(i))
+                list.add(i);
+        return list;
+    }
+
+
+
+
+    public static void main(String[] args)  {
+
+    }
+
+
 }

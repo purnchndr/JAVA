@@ -5,37 +5,47 @@ import java.util.Arrays;
 public class MergeSort {
 
     public static void mergeSort(int[] arr, int start, int end){
-        if(start >= end)  return;
-        int mid = (start+end)/2;
+        if(start == end)
+            return;
+        int mid = start+(end-start)/2;
+
         mergeSort(arr,start,mid);
         mergeSort(arr,mid+1,end);
-        mergeArrays(arr,start,mid,end);
+        mergeArrays(arr,start,end);
     }
 
-    private static void mergeArrays(int[] arr, int start, int mid, int end){
-        int size1 = mid-start;
-        int size2 = end-start-1;
-        int[] tempArr1 = new int[size1];
-        int[] tempArr2 = new int[size2];
-        for (int i =start; i< size1; i++)
-            tempArr1[i] = arr[i];
-        for (int i =mid+1; i< size1; i++)
-            tempArr2[i] = arr[i];
-        int i = 0;
-        int j = 0;
-        int k = start;
-        while(i < tempArr1.length && j < tempArr2.length)
-            arr[k++] = tempArr1[i] < tempArr2[j] ? tempArr1[i++] : tempArr2[j++];
-        while(i < tempArr1.length )
-            arr[k++] = tempArr1[i++] ;
-        while(j < tempArr2.length )
-            arr[k++] = tempArr1[j++];
+    private static void mergeArrays(int[] arr, int start, int end){
+
+        int size = end-start+1;
+        int index= 0;
+        int mid = (start+end)/2;
+
+        int[] tempArr = new int[size];
+
+        int i = start , j = mid+1;
+
+        while(i<= mid && j <= end)
+            tempArr[index++] = arr[i] < arr[j] ? arr[i++] : arr[j++];
+
+        while(i <= mid )
+            tempArr[index++] = arr[i++] ;
+
+        while(j <= end )
+            tempArr[index++] = arr[j++];
+
+        for(int item : tempArr)
+            arr[start++] = item;
 
     }
+
+
 
     public static void main(String[] args) {
-        int[] arr = {2,44,5,66,7,8,-1,7,90,1000};
+        int[] arr = {2,4,5,6,-1,100,-1999};
+       // int[] arr2 = {9,14,55};
         mergeSort(arr,0,arr.length-1);
+        //mergeArrays(arr,0, 6);
+        //var a = mergeTwoSortedArray(arr,arr2);
         System.out.println(Arrays.toString(arr));
     }
 }

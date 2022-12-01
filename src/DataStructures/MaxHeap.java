@@ -1,61 +1,42 @@
 package DataStructures;
 
 
-import java.util.*;
-
 public class MaxHeap implements Heap{
-    int[] heap;
-    int length;
-    int size = 0;
-    public MaxHeap(int size){
-        heap = new int[size+1];
-        this.length = size+1;
+    private int[] arr;
+    int size;
+    int DEFAULT_CAPACITY = 100;
+
+    public MaxHeap(int capacity){
+        this.arr = new int[capacity];
     }
-
-
+    public MaxHeap(){
+        this.arr = new int[DEFAULT_CAPACITY];
+    }
     @Override
     public boolean insert(int data) {
         if(isFull())
             return false;
-        heap[++size] = data;
-        heapify();
-        return true;
+       arr[size++] = data;
+       int index = size-1;
+       int parent  = parent(index);
+       while (index > 0 && arr[index] > arr[parent]){
+           swap(index,parent);
+           index = parent;
+           parent = parent(index);
+
+       }
+       return true;
     }
 
-    @Override
-    public void heapify() {
-        int i = size;
-        while (i > 0){
-            int parent = i/2;
-            if(parent > 0 &&  heap[i]> heap[parent]){
-                Heap.swap(heap,i,parent);
-                i = parent;
-            }
-            else
-                break;
-        }
-    }
- // [1,2,3,4,5,6,7,8,9,10]
-    public static  void heapiFy(int[] arr, int size) {
-        while (size>=0){
-            int parent = (size-1)/2;
-            if(parent >= 0 && arr[parent] < arr[size]){
-                Heap.swap(arr, parent,size);
-                size = parent;
-            }
-            else
-                break;
-        }
-    }
 
     @Override
     public int getSize() {
-        return size;
+        return this.size;
     }
 
     @Override
     public boolean isFull() {
-        return size == length-1;
+        return size == arr.length;
     }
 
     @Override
@@ -65,134 +46,107 @@ public class MaxHeap implements Heap{
 
     @Override
     public void print() {
-        for (int i = 1; i <= size; i++)
-            System.out.print(heap[i] +", ");
+        int count = 1;
+        for(int i = 0; i < getSize(); i++){
+            System.out.print(arr[i]+", ");
+        }
         System.out.println();
     }
 
     @Override
     public int peek() {
         if(isEmpty())
-            return -1;
-        return heap[1];
+            throw new IllegalStateException("Heap is Empty");
+        return arr[0];
     }
 
     @Override
     public int remove() {
         if(isEmpty())
-            return -1;
-        int data = heap[1];
-        int index =1;
-        reverseHeapiFy();
-        return data;
+            throw new IllegalStateException("Heap is Empty");
+        int res = arr[0];
+        arr[0] = arr[--size];
+        heapify();
+        return res;
     }
 
     @Override
     public int pop() {
+        if(isEmpty())
+            throw new IllegalStateException("Heap is Empty");
         return remove();
     }
 
     @Override
-    public int[] heapSort(int[] array) {
-        int[] sortArray = new int[array.length+1];
-        MaxHeap m = new MaxHeap(sortArray.length);
-        for(int i: array)
-            m.insert(i);
-        for(int i= 1 ; i<sortArray.length;i++){
-            array[i-1] = m.remove();
-        }
-
-        return array;
-
+    public void heapify() {
+        maxHeapify(0);
     }
-    public static int[] heapSort2(int[] array) {
-        for(int i= array.length-1 ; i >= 0; i--){
-           heapiFy(array,i);
-        }
-        return array;
 
+    public static void buildHeap(int[] arr){
+        int n = arr.length;
+        int parent = (n-2)/2;
+        for( ; parent >= 0 ; parent --){
+            int left = 0 ;// leftChild(parent);
+            int right = 0; // rightChild(parent);
+            int root = parent;
+            if(left < n && arr[left] > arr[root]){
+                root = left;
+            }
+            if(right < n && arr[right] > arr[root]){
+                root = right;
+            }
+            if(root != parent){
+                int temp = arr[parent];
+                arr[parent] = arr[root];
+                arr[root] = temp;
+               // maxHeapify(root);
+            }
+        }
+    }
+
+    private void maxHeapify(int index){
+        int left = leftChild(index);
+        int right = rightChild(index);
+        int root = index;
+        if(left < size && arr[left] > arr[root]){
+            root = left;
+        }
+        if(right < size && arr[right] > arr[root]){
+            root = right;
+        }
+        if(root != index){
+            swap(index, root);
+            maxHeapify(root);
+        }
+    }
+
+
+
+    private int leftChild(int index) {
+        return index*2+1;
+    }
+
+
+    private int rightChild(int index) {
+        return index*2+2;
+    }
+
+
+    private int parent(int index) {
+        return (index-1)/2;
     }
 
     @Override
-    public void reverseHeapiFy() {
-        int index = 1;
-        int targetIndex = index;
-        Heap.swap(heap,index,size--);
-        while(index <= size){
-            int leftChild = index*2;
-            int rightChild = index*2+1;
-            if(leftChild <= size && heap[targetIndex] < heap[leftChild])
-                targetIndex = leftChild;
-            if(rightChild <= size && heap[targetIndex] < heap[rightChild])
-                targetIndex = rightChild;
-            if (index != targetIndex){
-                Heap.swap(heap,index,targetIndex);
-                index = targetIndex;
-            }
-            else
-                break;
-        }
+    public int[] heapSort(int[] array) {
+        return new int[0];
     }
 
 
-    public static void main(String[] args) {
-//        Heap h = new MaxHeap(10);
-//        int[] a = {1,200,30,50,2,40,500,44};
-//        var b  = heapSort2(a);
-//        for (int i: b)
-//            System.out.print(i+", ");
-//
-//        h.insert(2);
-//        h.insert(6);
-//        h.insert(8);
-//        h.insert(3);
-//        h.insert(7);
-//
-//        h.print();
-//        System.out.println(h.remove());
-//        //h.print();
-//        System.out.println(h.remove());
-//        //h.print();
-//        System.out.println(h.remove());
-//        //h.print();
-//        System.out.println(h.remove());
-//        //h.print();
-//        System.out.println(h.remove());
-//        //h.print();
-//        System.out.println(h.remove());
-//        //h.print();
-//        System.out.println(h.peek());
-        PriorityQueue<Integer> mx
-                = new PriorityQueue<Integer>(
-                        //Collections.reverseOrder()
-                );
-//        Queue<Integer> q = new ArrayDeque<>();
-        mx.add(10);
-        mx.add(20);
 
-        mx.add(5);
-
-        mx.add(0);
-        mx.add(2);
-        mx.add(100);
-        mx.add(18);
-        mx.add(190);
-        System.out.println(mx.remove(100));
-//        System.out.println(mx.poll());
-//        System.out.println(mx.peek());
-//        while(!mx.isEmpty()){
-//            System.out.println(mx.poll());
-//        }
-        var a  = mx.toArray();
-        for(Object b : a){
-            System.out.print(b+", ");
-        }
-        for (var i : mx.toArray())
-            System.out.println(i);
-
-        PriorityQueue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
-        queue.add(1);
-        System.out.println(queue.size());
-
+    @Override
+    public void swap(int index, int targetIndex) {
+        int temp = arr[index];
+        arr[index] = arr[targetIndex];
+        arr[targetIndex] = temp;
     }
 }

@@ -1,9 +1,8 @@
 package DataStructures;
 
 public interface Heap {
-
     public boolean insert(int data);
-    public void heapify();
+
     public int getSize();
     public boolean isFull();
     public boolean isEmpty();
@@ -12,12 +11,11 @@ public interface Heap {
     public int remove();
     public int pop();
 
+    public void heapify();
+
+
     public int[] heapSort(int[] array);
 
-    public void reverseHeapiFy();
-    public static void swap(int[] array, int index, int targetIndex){
-        int temp = array[index];
-        array[index] = array[targetIndex];
-        array[targetIndex] = temp;
-    }
+    public  void swap(int index, int targetIndex);
+
 }

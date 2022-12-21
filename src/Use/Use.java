@@ -9,7 +9,14 @@ import java.util.*;
 import static Algorithms.Utility.swap;
 
 public class Use {
-
+    int age;
+    Use(){
+        this.age = 10;
+    }
+    Use(int age){
+        this.age = age;
+    }
+    
     public static void solve(int n){
         StringBuild build = new StringBuild(10);
         build.append("Hello");
@@ -437,13 +444,39 @@ public class Use {
                 list.add(i);
         return list;
     }
+    static int count1 =0;
 
+    public static int fibbo(int n){
+        if(n < 2)
+            return n;
+        count1++;
+        return fibbo(n-1)+fibbo(n-2);
+    }
 
-
+    public static int fibboDP(int n){
+        if(n < 2)
+            return n;
+        int first= 0;
+        int second = 1;
+        int currFibb = first + second;
+        for(int i = 2; i <= n; i++){
+            System.out.println(currFibb);
+            count1++;
+            currFibb = first + second;
+            first = second;
+            second = currFibb;
+        }
+        return currFibb;
+    }
 
     public static void main(String[] args)  {
-
+       Use i = new Use();
+        System.out.println(i.age);
+        Use ii = new Use();
+        System.out.println(ii.age);
     }
+
+
 
 
 }

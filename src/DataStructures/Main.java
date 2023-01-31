@@ -1,24 +1,40 @@
 package DataStructures;
 
-import DataStructures.StackCustom;
-
-import java.util.*;
-
 public class Main {
-    public static void main(String[] args) {
 
-        Heap heap = new MaxHeap(10);
-        heap.insert(10);
-//        heap.insert(20);
-//        heap.insert(4);
-//        heap.insert(440);
-//        heap.insert(1);
-        System.out.println(heap.getSize());
-        heap.print();
-        while(!heap.isEmpty())
-            System.out.println(heap.remove());
-        System.out.println(heap.getSize());
-        heap.print();
+    public boolean isReachable(int targetX, int targetY) {
+        int [][] dp = new int[targetX+1][targetY+1];
+        return isReachableH(targetX, targetY, 1,1, dp);
+    }
+
+    public boolean isReachableH(int targetX, int targetY, int x, int y, int [][] dp) {
+
+        //System.out.println("x is : "+ x +" & Y is : "+y);
+        if(x > targetX || y > targetY || x < 1 || y < 1)
+            return false;
+        if(dp[x][y] == 1)
+            return false;
+        if(x == targetX && y == targetY) {
+//            dp[x][y] = 0;
+            return true;
+        }
+        if(isReachableH(targetX, targetY, x, y-x, dp))
+            return true;
+        if(isReachableH(targetX, targetY, x-y, y,dp))
+            return true;
+        if(isReachableH(targetX, targetY, 2*x, y, dp))
+            return true;
+        if(isReachableH(targetX, targetY, x, 2*y, dp))
+            return true;
+        dp[x][y] = 1;
+        return false;
+    }
+    public static void main(String[] args) {
+    //LinkedListGen<String> list = new LinkedListGen<>();
+        Main m = new Main();
+        System.out.println(m.isReachable(1,3));
+
+
     }
 
 }

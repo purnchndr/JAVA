@@ -80,19 +80,45 @@ public class LinkedListGen<T> {
         }
     }
 
-    public void reverse(){
-       if(this.size < 2)  return;
-       LLNode<T> pre = null;
-       LLNode<T> curr = first;
-       LLNode<T> next = first.next;
-       last = first;
-       while (curr != null){
-           curr.next = pre;
-           pre = curr;
-           curr = next;
-           if(curr != null) next = next.next;
+    public void reverse() {
+        LLNode<T> pre = null;
+        LLNode<T> curr = first;
+        LLNode<T> next = null;
+        last = first;
+        while (curr != null) {
+            next = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = next;
+        }
+        first = pre;
+    }
+
+    public void reverseInKPartition(int k){
+       LLNode<T> node = first;
+       while (node != null){
+           LLNode<T> pre = null;
+           LLNode<T> curr = node;
+           LLNode<T> next = null;
+           int count = 0;
+           while (curr != null && count != k){
+               next = curr.next;
+               curr.next = pre;
+               pre = curr;
+               curr = next;
+           }
+           node = curr;
        }
-       first = pre;
+    }
+
+    public LLNode<T> reverseRH(LLNode<T> head){
+       if(head == null || head.next == null)
+           return head;
+       LLNode<T> node = reverseRH(head.next);
+
+       node.next = head;
+       head.next = head;
+       return node;
     }
 
 
@@ -159,7 +185,10 @@ public class LinkedListGen<T> {
        str.append("[");
        LLNode<T> temp = first;
        while(temp != null){
-           str.append(temp.data).append(",");
+           if(temp.next == null)
+               str.append(temp.data);
+           else
+               str.append(temp.data).append(",");
            temp = temp.next;
        }
        str.append("]");
@@ -194,31 +223,85 @@ public class LinkedListGen<T> {
        return false;
    }
 
+   public  void printKthFromLast(int k){
+       LLNode<T> node = first;
+       while(node != null && --k != 0)
+           node = node.next;
+       LLNode<T> lazyPointer = first;
+       while(node != null && node.next != null){
+           lazyPointer = lazyPointer.next;
+           node = node.next;
+       }
+       System.out.println(lazyPointer.data);
+
+   }
+    public  int printKthFromLast(LLNode<T> node, int k){
+       if(node == null){
+           return 0;
+       }
+       int ans = printKthFromLast( node.next, k)+1;
+       if(ans == k)
+           System.out.println(node.data);
+       return ans;
+    }
+
+    public LLNode<T> detectLoopL(){
+       LLNode<T> fast= first, slow= first;
+       while(fast != null && fast.next != null){
+           fast = fast.next.next;
+           slow = slow.next;
+           if(fast == slow){
+               slow = first;
+               while(fast != slow){
+                   fast = fast.next;
+                   slow = slow.next;
+                   if(fast.next == slow.next){
+                       fast.next = null;
+                       return slow.next;
+                   }
+               }
+               return fast;
+           }
+       }
+        return null;
+    }
+
 
     public static void main(String[] args) {
-        LinkedListGen<Object> list = new LinkedListGen<>();
+        LinkedListGen<Integer> list = new LinkedListGen<>();
         list.add(90);
         list.add(30);
         list.add(40);
         list.add(70);
         list.add(110);
+        LLNode<Integer> node = list.last;
         list.add(120);
         list.add(600);
-
-       // list.add("jkfahfakjfhakj");
-       // list.addFirst(6);
-        //list.addLast(10);
-//        System.out.println(list.indexOf("jkfahfakjfhakj"));
-//        System.out.println(list.contains(90));
-//        System.out.println(list);
-//        System.out.println(list.removeFirst());
-//        System.out.println(list.removeLast());
-//
-        System.out.println(list.toArray());
-//        list.reverse();
-        list.last.next = list.first;
-        //System.out.println(list);
-       System.out.println(list.detectLoop());
+        list.add(90);
+        list.add(30);
+        list.add(40);
+        list.add(70);
+        list.add(110);
+        list.last.next = node;
+        var a = list.detectLoopL();
+        System.out.println(a.data);
+        //a.next = null;
+//        var b = list.detectLoop();
+        //System.out.println(b);
+//        //list.printKthFromLast(list.first, 1);
+        System.out.println(list);
+//        System.out.println((char)65);
     }
 
+    public int findMiddle(){
+        LLNode<T> slow = first;
+        LLNode<T> fast = first;
+        int count = 0;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            count++;
+        }
+        return count;
+    }
 }

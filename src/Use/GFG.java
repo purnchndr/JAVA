@@ -6,7 +6,7 @@ public class GFG {
 
     public static   boolean cm(){
         String a = "ABCDEF";
-        String b = "DEFABC";
+        String b = "DEFABC ";
         if(a.length() != b.length())
             return false;
         int index = -1;
@@ -44,12 +44,55 @@ public class GFG {
                return false;
         return true;
     }
+
+    public static int toggle(int n, int[] arr) {
+        int si = 0;
+        int count = 0;
+        int preCount = 0;
+        for(int i = 0; i< n; i++){
+            if(arr[i] == 0){
+                int j = i;
+
+                while( j < n && arr[j] == 0){
+                    j++;
+                    count++;
+                }
+                if( preCount < count ){
+                    preCount = count;
+                    si = i;
+                }
+                count = 0;
+                i =j-1;
+            }
+        }
+        while(si< n && arr[si] == 0  ){
+            arr[si] = 1;
+            si++;
+        }
+        int res = 0;
+        int temp = 0;
+
+        for(int i : arr)
+            System.out.println(i);
+
+        for(int i = 0; i< n; i++){
+            if(arr[i] == 1)
+                temp++;
+            else{
+                res = Math.max(res, temp);
+                temp =0;
+            }
+        }
+
+            res = Math.max(res, temp);
+        return res;
+
+    }
+
     public static void main(String[] args)  {
 
-        //System.out.println(suff());
-        int s = 9;
-        int e = 3;
-        System.out.println((s+e)<<1);
+
+        System.out.println(toggle(6,new int[]{1,0,1,0,1,0}));
 
     }
 

@@ -4,6 +4,7 @@ package Use;
 import DataStructures.StringBuild;
 import Exceptions.*;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import static Algorithms.Utility.swap;
@@ -43,6 +44,8 @@ public class Use {
     }
 
     public static void swapAlternate(int[] arr){
+        if(arr.length < 2)
+            return;
         for(int i = 1; i< arr.length ;i +=2){
             int temp = arr[i];
             arr[i] = arr[i-1];
@@ -469,11 +472,79 @@ public class Use {
         return currFibb;
     }
 
-    public static void main(String[] args)  {
-       Use i = new Use();
-        System.out.println(i.age);
-        Use ii = new Use();
-        System.out.println(ii.age);
+    public static void arrengeNum(int num)  {
+        int start = 0;
+        int end = num-1;
+
+      int [] arr = new int[num];
+      for(int i = 0; i< num;i++){
+          if(i % 2 == 0){
+              arr[start++] = i+1;
+             // start +=2;
+          }
+          else {
+              arr[end--] = i + 1;
+              //end -=2;
+          }
+
+      }
+        for (int i : arr)
+            System.out.println(i);
+
+    }
+
+
+    public static int findUniqueNumber(int [] arr){
+        if(arr == null || arr.length ==0)
+            return Integer.MIN_VALUE;
+        int res = 0;
+        for (int j : arr)
+            res = res ^ j;
+        return res;
+    }
+
+    public static int findDuplicateNumber(int [] arr){
+        if(arr == null || arr.length == 0)
+            return Integer.MIN_VALUE;
+        int n = arr.length;
+        int res = 0;
+        for (int j : arr)
+            res +=  j;
+        int sum = ((n-1)*(n-2))/2;
+        return res-sum;
+    }
+
+    public static int findDuplicateNumber2(int [] arr){
+        if(arr == null || arr.length == 0)
+            return Integer.MIN_VALUE;
+
+        int res = 0;
+        for (int j : arr)
+            res = res ^ j;
+        int sum=0;
+        for(int i = 0; i < arr.length-1; i++)
+            sum = sum ^ i;
+        return res^sum;
+    }
+
+    public static int binarySearch(int[] arr,int target){
+        int start = 0,end = arr.length-1, mid = (start+end)/2;
+        while(start <= end){
+            if(arr[mid] == target)
+                return mid;
+            else if(arr[mid]< target)
+                start = mid+1;
+            else
+                end = mid-1;
+            mid = (start+end)/2;
+        }
+        return -1;
+    }
+
+    public static void main(String[] args){
+
+
+        System.out.println(binarySearch(new int[]{1,2,4,5,7},4));
     }
 
 

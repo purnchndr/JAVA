@@ -542,8 +542,6 @@ public class Use {
     }
 
     public static void main(String[] args){
-
-
         System.out.println(binarySearch(new int[]{1,2,4,5,7},4));
     }
 

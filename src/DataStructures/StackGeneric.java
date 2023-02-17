@@ -52,12 +52,26 @@ public class StackGeneric<T> {
     public String toString(){
         StringBuild string  = new StringBuild();
         string.append("[");
-        for( int i = 0; i < size(); i++ ){
+        for( int i = size()-1; i >= 0; i-- ){
             string.append(stack.get(i).toString());
-            if(i != size()-1 )string.append(",");
+            if(i != 0 )string.append(",");
         }
         string.append("]");
         return string.toString();
+    }
+
+    public void insertAtBottom(T data){
+        if(this.isEmpty()){
+            this.push(data);
+            return;
+        }
+        T tempData = this.pop();
+        insertAtBottom(data);
+        this.push(tempData);
+    }
+
+    public void reverse(){
+
     }
 
 
@@ -72,6 +86,8 @@ public class StackGeneric<T> {
         System.out.println(stack.size());
         System.out.println(stack.pop());
         System.out.println(stack.size());
+        System.out.println(stack);
+        stack.insertAtBottom(10000);
         System.out.println(stack);
     }
 
